@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
             <body>
                 <Header />
                 <AntdRegistry>{children}</AntdRegistry>
-                <Toaster />
+                <Toaster position='top-right'/>
             </body>
         </html>
     );
