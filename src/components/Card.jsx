@@ -8,7 +8,7 @@ export default function Card({ verb, method, description, color, Icon, style }) 
             className={styles.card}
             style={{ ...style, '--card-color': color }}>
             <div className={styles.cardHeader}>
-                <Icon color={color} size={32} />
+                <Icon color="#5cdcf6" size={32} />
                 <h2>
                     {verb} - {method}
                 </h2>
