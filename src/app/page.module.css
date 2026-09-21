@@ -11,7 +11,22 @@
 }
 
 .footer {
-    background-color: lightskyblue;
+    margin-top: 2rem;
+    padding: 1.5rem 2rem;
+    background-color: #050505;
+    border-top: 1px solid #181818;
     text-align: center;
-    padding: 1rem 2rem;
+}
+
+.footer p {
+    margin: 0.3rem 0;
+    color: #cfcfcf;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.footer p:last-child {
+    color: #5cdcf6;
+    font-size: 0.75rem;
 }
