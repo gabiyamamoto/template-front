@@ -29,7 +29,7 @@ export default function ApiKeyPage() {
 
     return (
         <main>
-            <h2>Veja api-key icando exposta no header desta chamada</h2>
+            <h2>Veja api-key ficando exposta no header desta chamada</h2>
             <p>DevTools - Network - Header - series</p>
             <p>Axios.get direto na API, com api-key exposta no navegador</p>
             {loading ? (

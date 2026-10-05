@@ -52,5 +52,13 @@ export const crud = [
         description: 'Cria série via modal e API Route',
         color: 'purple',
         Icon: PlusCircle,
+    },
+    {
+        id: 5,
+        method: 'SSR',
+        verb: 'Read',
+        description: 'Cria série via modal e API Route',
+        color: 'purple',
+        Icon: PlusCircle,
     }
 ];
