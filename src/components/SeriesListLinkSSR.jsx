@@ -1,6 +1,5 @@
-import toast from "react-hot-toast";
-import Link from "next/link";
-import { headers } from "next/headers";
+import axios from "axios";
+import Link from 'next/link';
 
 export default async function Series() {
     let series = [];
@@ -16,11 +15,16 @@ export default async function Series() {
         console.error('Erro ao buscar séries:', error);
     }
 
-  return (
-    <ul>
-      {series.map((item) => (
-        <li key={item.id}>{item.title}</li>
-      ))}
-    </ul>
-  )
+    return (
+        <ul>
+            {series.map((item) => {
+                return <li key={item.id}>
+                    <h2>{item.title}</h2>
+                    <Link href={`/read/${item.id}`}>
+                        Ver série
+                    </Link>
+                </li>;
+            })}
+        </ul>
+    );
 }
