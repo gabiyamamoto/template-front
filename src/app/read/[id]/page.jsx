@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmDelete from '@components/ConfirmDelete';
 
 export default function ReadByIdPage() {
     const { id } = useParams();
@@ -32,25 +33,44 @@ export default function ReadByIdPage() {
         buscarSerie();
     }, [id]);
 
-    async function handleUpdate(values) {
+    const handleUpdate = async (values) => {
         setSaving(true);
 
         try {
-            const response = await axios.put(`/api/series/${id}`, values);
-            setSerie(response.data);
+            await axios.put(`/api/series/${id}`, values);
+            setSerie({ ...serie, ...values });
             setEditOpen(false);
-            toast.success('Série atualizada.', { id: 'read-id' });
+            toast.success('Série atualizada com sucesso.', {
+                id: 'update-success'
+            });
         } catch (error) {
-            toast.error('Erro ao atualizar série.', { id: 'read-id' });
+            toast.error('Erro ao atualizar a série.', {
+                id: 'update-error'
+            });
             console.error(error);
         } finally {
             setSaving(false);
+        }
+    };
+
+    const handleDelete = async (values) => {
+        setDeleting(true);
+
+        try {
+            await axios.delete(`/api/series/${id}`, values);
+            setSerie(null);
+            toast.success('Série excluída com sucesso.', { id: 'delete-success' });
+        } catch (error) {
+            toast.error('Erro ao excluir a série.', { id: 'delete-error' });
+            console.error(error);
+        } finally {
+            setDeleting(false);
         }
     }
 
     return (
         <main>
-            <h2>Get By Id - read</h2>
+            <h2>Get By Id - read{serie && ` - ${serie.title}`}</h2>
             <p>O navegador busca, edita e exclui pelo /api/series/[id] (nosso route.js); o servidor fala com a API usando a api-key privada.</p>
             <p>Abra o DevTools - Network: aparece a série (GET/PUT/DELETE), sem x-api-key.</p>
 
@@ -83,6 +103,14 @@ export default function ReadByIdPage() {
                             confirmLoading={saving}
                             onSubmit={handleUpdate}
                             onCancel={() => setEditOpen(false)}
+                        />
+
+                        <ConfirmDelete
+                            openModal={deleteOpen}
+                            serie={serie}
+                            confirmLoading={deleting}
+                            onConfirm={handleDelete}
+                            onCancel={() => setDeleteOpen(false)}
                         />
                     </>
                 )
